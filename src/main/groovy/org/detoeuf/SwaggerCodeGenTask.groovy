@@ -30,12 +30,12 @@ class SwaggerCodeGenTask extends DefaultTask {
 
     @TaskAction
     void swaggerCodeGen() {
-        deleteFileValidator(project.projectDir)
-        deleteFileValidator(project.rootProject.projectDir)
         CodegenConfigurator config = configurator()
 
-        // anyway .. delete any existing files for a clean build
+        // delete any existing files for a clean build unless it's the project root directory
         if (cleanOutputDir) {
+            deleteFileValidator(project.projectDir)
+            deleteFileValidator(project.rootProject.projectDir)
             project.delete(outputDir())
         }
 
