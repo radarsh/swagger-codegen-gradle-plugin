@@ -78,6 +78,24 @@ gradle swagger
 ### Configuration parameters
 the `swagger {}` configuration is passed to [CodegenConfigurator.java](https://github.com/swagger-api/swagger-codegen/blob/v2.2.1/modules/swagger-codegen/src/main/java/io/swagger/codegen/config/CodegenConfigurator.java)
 
+#### Dynamic properties
+Some Swagger codegen configurations will contain extra properties that are not part of the io.swagger.codegen.CodegenConfig interface. For example there is the `sourceFolder` property that is only applicable if using jaxrs-spec as the value of the `lang` property. In order to set such properties, we should use the `dynamicProperty` method inside the `swagger {}` configuration as shown below.
+
+```
+swagger {
+    lang = 'jaxrs-spec'
+
+    addDynamicProperty 'sourceFolder', 'src/swagger/java'
+
+    additionalProperties = [
+        ...
+    ]
+    systemProperties = [
+        ...
+    ]
+}
+```
+
 … to be documented …
 
 ### deprecation warning
